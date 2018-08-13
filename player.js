@@ -5,14 +5,14 @@ var left = false;
 var right = false;
 var shoot = false;
 var direction = "right"
+var canJump = true;
 
 //PLAYER CHARACTER OBJECT
 var player = {
-  height: 15,
-  width: 5,
-  gravity: 4,
+  height: 50,
+  width: 20,
   posX: 250,
-  posY: 335,
+  posY: 300,
   gravity: 3,
   moveLeft: function(){
     direction = "left"
@@ -24,8 +24,10 @@ var player = {
     this.posX += 3
   },
   moveUp: function(){
-    if (player.posY+player.height == background.posY || player.posY+player.height > background.posY )
-      this.gravity *= -1;
+    if(canJump){
+      this.gravity = -7;
+      canJump = false;
+    }
   },
 
   shoot: function(){
@@ -36,8 +38,13 @@ var player = {
   },
 
   draw: function(){
-    if( this.posY+this.height > background.posY){
-      this.posY + this.gravity;
+    this.posY += this.gravity
+    if ( player.gravity < 3){
+      this.gravity += 0.3
+    }
+    if ( player.posY+player.height > background.posY){
+      this.gravity = 0
+      canJump = true
     }
     ctx.fillRect(this.posX,this.posY,this.width,this.height)
   }
@@ -46,9 +53,6 @@ var player = {
 var first = 0;
 
 function playerMovement(){
-  if ( player.posY+player.height < background.posY){
-    player.gravity = 1
-  }
   if ( left == true){
     player.moveLeft();
   }

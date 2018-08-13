@@ -4,8 +4,8 @@ var bulletsArr = []
 function Projectile(direction) {
   this.height = 2;
   this.width = 5;
-  this.posY = player.posY+5;
-  this.posX = player.posX+2;
+  this.posY = player.posY+(player.height/2);
+  this.posX = player.posX+(player.width/2);
   this.direction = direction;
   ctx.fillRect(this.posX,this.posY,this.width,this.height)
 };
