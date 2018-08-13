@@ -22,12 +22,21 @@ var background = {
 }
 
 
+
 setInterval(gameplay, 1000/50)
+
+var score = 0;
+
+function drawScore(){
+  ctx.font = "30px Arial";
+  ctx.fillText("Score:"+score,10,50);
+}
 
 var updateCounter = 0
 
 function gameplay(){
   ctx.clearRect(0,0,600,500)
+  ctx.globalAlpha = 0.2
   background.draw();
   player.draw();
   playerMovement();
@@ -37,5 +46,6 @@ function gameplay(){
   checkIfHit(bulletsArr, enemiesArr);
   clearEnemies(enemiesArr);
   clearArr(bulletsArr);
-  updateCounter++
+  drawScore();
+  updateCounter++;
 }

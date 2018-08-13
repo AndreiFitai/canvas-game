@@ -19,6 +19,10 @@ function clearArr(array){
   }
 }
 
+function clearBullet(index){
+  bulletsArr.splice(index,1)
+}
+
 function moveBullets(array) {
   for (var x = 0; x < array.length; x++) {
     if (array[x].direction == "right")
@@ -33,8 +37,12 @@ function checkIfHit(bullets, enemies){
   for ( var x = 0; x < bullets.length; x++){
     for ( var j = 0; j < enemies.length; j++){
       if ( (bullets[x].posX >= enemies[j].posX && bullets[x].posX <= enemies[j].posX+enemies[j].width) 
-      && (bullets[x].posY >= enemies[j].posY && bullets[x].posY <= enemies[j].posY+enemies[j].height))
-        console.log('hit')
+      && (bullets[x].posY >= enemies[j].posY && bullets[x].posY <= enemies[j].posY+enemies[j].height)){
+        clearEnemy(j);
+        clearBullet(x);
+        score++;
+        break;
+      }
     }
   }
 }
