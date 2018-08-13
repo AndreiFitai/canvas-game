@@ -39,10 +39,10 @@ var player = {
 
   draw: function(){
     this.posY += this.gravity
-    if ( player.gravity < 3){
+    if ( this.gravity < 3){
       this.gravity += 0.3
     }
-    if ( player.posY+player.height > background.posY){
+    if ( this.posY+this.height > background.posY){
       this.gravity = 0
       canJump = true
     }

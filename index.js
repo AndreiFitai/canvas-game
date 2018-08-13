@@ -31,8 +31,11 @@ function gameplay(){
   background.draw();
   player.draw();
   playerMovement();
-  // enemies.draw()
+  createEnemy();
+  moveEnemies(enemiesArr);
   moveBullets(bulletsArr);
+  checkIfHit(bulletsArr, enemiesArr);
+  clearEnemies(enemiesArr);
   clearArr(bulletsArr);
   updateCounter++
 }

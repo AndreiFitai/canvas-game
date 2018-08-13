@@ -19,12 +19,22 @@ function clearArr(array){
   }
 }
 
-function moveBullets(array){
-  for ( var x = 0; x < array.length; x++){
-    if ( array[x].direction == "right")
+function moveBullets(array) {
+  for (var x = 0; x < array.length; x++) {
+    if (array[x].direction == "right")
       array[x].posX += 5;
-    if ( array[x].direction == "left")
+    if (array[x].direction == "left")
       array[x].posX -= 5;
-    ctx.fillRect(array[x].posX,array[x].posY,array[x].width,array[x].height)
+    ctx.fillRect(array[x].posX, array[x].posY, array[x].width, array[x].height);
+  }
+}
+
+function checkIfHit(bullets, enemies){
+  for ( var x = 0; x < bullets.length; x++){
+    for ( var j = 0; j < enemies.length; j++){
+      if ( (bullets[x].posX >= enemies[j].posX && bullets[x].posX <= enemies[j].posX+enemies[j].width) 
+      && (bullets[x].posY >= enemies[j].posY && bullets[x].posY <= enemies[j].posY+enemies[j].height))
+        console.log('hit')
+    }
   }
 }
