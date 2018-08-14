@@ -14,18 +14,6 @@ var ctx = canvas.getContext('2d')
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 
-var platform = {
-  width: canvasWidth,
-  height: 150,
-  posX: 0,
-  posY: 350,
-  draw: function(){
-    ctx.fillRect(this.posX,this.posY,this.width,this.height)
-  }
-}
-
-
-
 var gameInterval = setInterval(gameplay, 1000/50)
 
 var score = 0;
@@ -42,15 +30,18 @@ function gameplay(){
   //globalAlpha for testing - please remove before final
   // ctx.globalAlpha = 0.2
   backgrounds.draw();
-  platform.draw()
+  createPlatform();
+  drawPlatforms();
+  createPlatform();
   player.draw();
-  createEnemy();
+  // createEnemy();
   playerMovement();
   moveEnemies();
   playerCollision();
   moveBullets();
   checkIfHit();
   clearEnemies();
+  removePlatforms();
   clearArr();
   drawScore();
   updateCounter++;

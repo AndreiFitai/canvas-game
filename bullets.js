@@ -9,7 +9,7 @@ function Projectile(direction) {
   this.posY = player.posY+(player.height/2);
   this.posX = player.posX+(player.width/2);
   this.direction = direction;
-  ctx.fillRect(this.posX,this.posY,this.width,this.height)
+  ctx.fillRect(this.posX,this.posY,this.width,this.height);
 };
 
 
