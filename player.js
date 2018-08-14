@@ -6,17 +6,19 @@ var right = false;
 var shoot = false;
 var direction = "right"
 
+//SOUNDS
+
 //PLAYER CHARACTER OBJECT
 var player = {
   height: 50,
   width: 20,
   posX: 200,
-  posY: 150,
+  posY: 100,
   gravity: 3,
-  canJump: true,
+  canJump: false,
   moveLeft: function () {
     direction = "left"
-    if (wallCheckLeft())
+    if (wallCheckLeft() && this.posX> 50)
       this.posX -= 5
   },
 
@@ -79,19 +81,17 @@ function calcFloor() {
 // Check if if player is hitting walls
 
 function wallCheckLeft() {
-  if (player.posY + player.height > platformArr[currentPlat - 1].posY && player.posX <= platformArr[currentPlat - 1].posX + platformArr[currentPlat - 1].width) {
-    console.log('hit wall')
-    player.posX = platformArr[currentPlat - 1].posX + platformArr[currentPlat - 1].width
-    return false
+  if (currentPlat - 1 >= 0){
+    if (player.posY + player.height > platformArr[currentPlat - 1].posY && player.posX <= platformArr[currentPlat - 1].posX + platformArr[currentPlat - 1].width) {
+      player.posX = platformArr[currentPlat - 1].posX + platformArr[currentPlat - 1].width
+      return false
+    }
   }
   return true;
 }
 
 function wallCheckRight() {
-  console.log("right edge", player.posX + player.width)
-  console.log("plat+1 edge", platformArr[currentPlat + 1].posX)
   if (player.posY + player.height > platformArr[currentPlat + 1].posY && player.posX + player.width >= platformArr[currentPlat + 1].posX) {
-    console.log('hit wall right')
     player.posX = platformArr[currentPlat + 1].posX - player.width;
     return false;
   }
@@ -126,14 +126,11 @@ function playerCollision() {
   for (var x = 0; x < enemiesArr.length; x++) {
     if ((enemiesArr[x].posX >= player.posX && enemiesArr[x].posX <= player.posX + player.width) &&
       (enemiesArr[x].posY + enemiesArr[x].height >= player.posY && enemiesArr[x].posY <= player.posY + player.height)) {
-      console.log('test')
-      clearInterval(gameInterval)
-      ctx.font = "30px Arial";
-      ctx.fillText("Game Over !" + "\n" + "Final score:" + score, 300, 100);
+      clearEnemy(x);
+      lives--;
     }
   }
-  if (player.posY + player.height == 500) {
-    console.log('test')
+  if (player.posY + player.height == 500 || lives == 0) {
     clearInterval(gameInterval)
     ctx.font = "30px Arial";
     ctx.fillText("Game Over !" + "\n" + "Final score:" + score, 300, 100);

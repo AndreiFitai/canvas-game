@@ -7,6 +7,7 @@ function Enemy() {
   this.posY = calcFloorEnemies(this) - Math.floor(Math.random()*100);
   this.gravity = 3;
   this.canJump = true;
+  this.currentPlat = 0;
 }
 
 function createEnemy() {
@@ -19,6 +20,9 @@ function clearEnemies() {
     if (enemiesArr[x].posX+enemiesArr[x].width < 0) {
       enemiesArr.splice(x, 1);
     }
+    if (enemiesArr[x].posY + enemiesArr[x].height == 500) {
+      enemiesArr.splice(x,1);
+    }
   }
 }
 
@@ -28,12 +32,16 @@ function clearEnemy(index) {
 
 function moveEnemies() {
   for (var x = 0; x < enemiesArr.length; x++) {
-    enemiesArr[x].posX -= 7 ;
+    var floor = calcFloorEnemies(enemiesArr[x]);
+    if(wallCheckEnemy(enemiesArr[x])){
+      enemiesArr[x].posX -= 7 ;
+    }
     enemiesArr[x].posY += enemiesArr[x].gravity
     if (enemiesArr[x].gravity < 3) {
       enemiesArr[x].gravity += 0.3
     }
-    if (enemiesArr[x].posY + enemiesArr[x].height > calcFloorEnemies(enemiesArr[x])) {
+    if (enemiesArr[x].posY + enemiesArr[x].height > floor ){
+      enemiesArr[x].posY = floor - enemiesArr[x].height;
       enemiesArr[x].gravity = 0
       enemiesArr[x].canJump = true
     }
@@ -45,6 +53,16 @@ function moveEnemies() {
   }
 }
 
+function wallCheckEnemy(enemy) {
+  if (enemy.currentPlat-1 >= 0){
+    if (enemy.posY + enemy.height > platformArr[(enemy.currentPlat) - 1].posY && enemy.posX <= platformArr[(enemy.currentPlat) - 1].posX + platformArr[(enemy.currentPlat) - 1].width) {
+      enemy.posX = platformArr[(enemy.currentPlat) - 1].posX + platformArr[(enemy.currentPlat) - 1].width
+      return false
+    }
+  }
+  return true;
+}
+
 function calcFloorEnemies(enemy) {
   var tempPos = 0;
   for (var x = 0; x < platformArr.length; x++) {
@@ -52,6 +70,7 @@ function calcFloorEnemies(enemy) {
       (enemy.posX + enemy.width > platformArr[x].posX && enemy.posX + enemy.width < platformArr[x].posX + platformArr[x].width)) {
       if (platformArr[x].posY > tempPos)
         tempPos = platformArr[x].posY
+        enemy.currentPlat = x;
     }
   }
   return tempPos
