@@ -1,4 +1,6 @@
-var bulletsArr = []
+var bulletsArr = [];
+var canvasWidth = canvas.width;
+var canvasHeight = canvas.height;
 
 // PROJECTILE CONSTRUCTOR
 function Projectile(direction) {
@@ -11,10 +13,10 @@ function Projectile(direction) {
 };
 
 
-function clearArr(array){
-  for ( var x = 0; x < array.length; x++){
-    if ( array[x].posX < 0 || array[x].posX > 600 ){
-      array.splice(x,1);
+function clearArr(){
+  for ( var x = 0; x < bulletsArr.length; x++){
+    if ( bulletsArr[x].posX < 0 || bulletsArr[x].posX > canvasWidth ){
+      bulletsArr.splice(x,1);
     }
   }
 }
@@ -23,21 +25,21 @@ function clearBullet(index){
   bulletsArr.splice(index,1)
 }
 
-function moveBullets(array) {
-  for (var x = 0; x < array.length; x++) {
-    if (array[x].direction == "right")
-      array[x].posX += 5;
-    if (array[x].direction == "left")
-      array[x].posX -= 5;
-    ctx.fillRect(array[x].posX, array[x].posY, array[x].width, array[x].height);
+function moveBullets() {
+  for (var x = 0; x < bulletsArr.length; x++) {
+    if (bulletsArr[x].direction == "right")
+      bulletsArr[x].posX += 5;
+    if (bulletsArr[x].direction == "left")
+      bulletsArr[x].posX -= 5;
+    ctx.fillRect(bulletsArr[x].posX, bulletsArr[x].posY, bulletsArr[x].width, bulletsArr[x].height);
   }
 }
 
-function checkIfHit(bullets, enemies){
-  for ( var x = 0; x < bullets.length; x++){
-    for ( var j = 0; j < enemies.length; j++){
-      if ( (bullets[x].posX >= enemies[j].posX && bullets[x].posX <= enemies[j].posX+enemies[j].width) 
-      && (bullets[x].posY >= enemies[j].posY && bullets[x].posY <= enemies[j].posY+enemies[j].height)){
+function checkIfHit(){
+  for ( var x = 0; x < bulletsArr.length; x++){
+    for ( var j = 0; j < enemiesArr.length; j++){
+      if ( (bulletsArr[x].posX >= enemiesArr[j].posX && bulletsArr[x].posX <= enemiesArr[j].posX+enemiesArr[j].width) 
+      && (bulletsArr[x].posY >= enemiesArr[j].posY && bulletsArr[x].posY <= enemiesArr[j].posY+enemiesArr[j].height)){
         clearEnemy(j);
         clearBullet(x);
         score++;

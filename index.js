@@ -11,8 +11,11 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d')
 
-var background = {
-  width: 600,
+var canvasWidth = canvas.width;
+var canvasHeight = canvas.height;
+
+var platform = {
+  width: canvasWidth,
   height: 150,
   posX: 0,
   posY: 350,
@@ -23,7 +26,7 @@ var background = {
 
 
 
-setInterval(gameplay, 1000/50)
+var gameInterval = setInterval(gameplay, 1000/50)
 
 var score = 0;
 
@@ -35,17 +38,20 @@ function drawScore(){
 var updateCounter = 0
 
 function gameplay(){
-  ctx.clearRect(0,0,600,500)
-  ctx.globalAlpha = 0.2
-  background.draw();
+  ctx.clearRect(0,0,canvasWidth,canvasHeight);
+  //globalAlpha for testing - please remove before final
+  // ctx.globalAlpha = 0.2
+  backgrounds.draw();
+  platform.draw()
   player.draw();
-  playerMovement();
   createEnemy();
-  moveEnemies(enemiesArr);
-  moveBullets(bulletsArr);
-  checkIfHit(bulletsArr, enemiesArr);
-  clearEnemies(enemiesArr);
-  clearArr(bulletsArr);
+  playerMovement();
+  moveEnemies();
+  playerCollision();
+  moveBullets();
+  checkIfHit();
+  clearEnemies();
+  clearArr();
   drawScore();
   updateCounter++;
 }

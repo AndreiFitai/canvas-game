@@ -3,21 +3,21 @@ var enemiesArr = []
 function Enemy() {
   this.height = 35;
   this.width = 15;
-  this.posX = 600;
-  this.posY = 315;
+  this.posX = canvasWidth;
+  this.posY = 315 - Math.floor(Math.random()*100);
   this.gravity = 3;
   this.canJump = true;
 }
 
 function createEnemy() {
-  if ((Math.floor(Math.random() * 1000) < 25) && enemiesArr.length <= 7)
-    enemiesArr.push(new Enemy)
+  if ((Math.floor(Math.random() * 1000) < 35) && enemiesArr.length <= 8)
+    enemiesArr.push(new Enemy())
 }
 
-function clearEnemies(array) {
-  for (var x = 0; x < array.length; x++) {
-    if (array[x].posX < 0) {
-      array.splice(x, 1);
+function clearEnemies() {
+  for (var x = 0; x < enemiesArr.length; x++) {
+    if (enemiesArr[x].posX < 0) {
+      enemiesArr.splice(x, 1);
     }
   }
 }
@@ -26,21 +26,21 @@ function clearEnemy(index) {
   enemiesArr.splice(index, 1)
 }
 
-function moveEnemies(array) {
-  for (var x = 0; x < array.length; x++) {
-    array[x].posX -= 3;
-    array[x].posY += array[x].gravity
-    if (array[x].gravity < 3) {
-      array[x].gravity += 0.3
+function moveEnemies() {
+  for (var x = 0; x < enemiesArr.length; x++) {
+    enemiesArr[x].posX -= 6.5 ;
+    enemiesArr[x].posY += enemiesArr[x].gravity
+    if (enemiesArr[x].gravity < 3) {
+      enemiesArr[x].gravity += 0.3
     }
-    if (array[x].posY + array[x].height > background.posY) {
-      array[x].gravity = 0
-      canJump = true
+    if (enemiesArr[x].posY + enemiesArr[x].height > platform.posY) {
+      enemiesArr[x].gravity = 0
+      enemiesArr[x].canJump = true
     }
-    if (Math.floor(Math.random() * 1000) < 25 && array[x].canJump == true) {
-      array[x].gravity = -(Math.floor((Math.random()*10)+5));
-      array[x].canJump = false;
+    if (Math.floor(Math.random() * 1000) < 25 && enemiesArr[x].canJump == true) {
+      enemiesArr[x].gravity = -(Math.floor((Math.random()*10)+3));
+      enemiesArr[x].canJump = false;
     }
-    ctx.fillRect(array[x].posX, array[x].posY, array[x].width, array[x].height)
+    ctx.fillRect(enemiesArr[x].posX, enemiesArr[x].posY, enemiesArr[x].width, enemiesArr[x].height)
   }
 }

@@ -16,22 +16,25 @@ var player = {
   canJump: true,
   moveLeft: function(){
     direction = "left"
-    this.posX -= 3
+    this.posX -= 5
   },
 
   moveRight: function(){
     direction = "right"
-    this.posX += 3
+    if ( this.posX < 450)
+      this.posX += 5
+    else
+      backgrounds.move();
   },
   moveUp: function(){
     if(this.canJump){
-      this.gravity = -8;
+      this.gravity = -11;
       this.canJump = false;
     }
   },
   moveDown: function(){
-    if ( this.posY+this.height < background.posY )
-    this.gravity = 5;
+    if ( this.posY+this.height < platform.posY )
+    this.gravity = 8;
   },
 
   shoot: function(){
@@ -43,10 +46,10 @@ var player = {
 
   draw: function(){
     this.posY += this.gravity
-    if ( this.gravity < 3){
-      this.gravity += 0.3
+    if ( this.gravity < 5){
+      this.gravity += 0.4
     }
-    if ( this.posY+this.height > background.posY){
+    if ( this.posY+this.height > platform.posY){
       this.gravity = 0
       this.canJump = true
     }
@@ -70,10 +73,22 @@ function playerMovement(){
     player.moveDown();
   }
   if (shoot == true){
-    if ( updateCounter%10 == 0 || first == 0){
+    if ( updateCounter%15 == 0 || first == 0){
       bulletsArr.push(new Projectile(direction));
       first++;
     }
+  }
+}
+
+function playerCollision(){
+  for ( var x = 0; x < enemiesArr.length; x++){
+    if ( (enemiesArr[x].posX >= player.posX && enemiesArr[x].posX <= player.posX+player.width) 
+      && (enemiesArr[x].posY+enemiesArr[x].height >= player.posY && enemiesArr[x].posY <= player.posY+player.height)){
+        console.log('test')
+        clearInterval(gameInterval)
+        ctx.font = "30px Arial";
+        ctx.fillText("Game Over !"+"\n"+"Final score:"+score,300,100);
+      }
   }
 }
 
