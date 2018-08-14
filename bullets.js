@@ -1,14 +1,14 @@
 var bulletsArr = [];
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
-var bulletImg = new Image(6,4)
+var bulletImg = new Image()
 bulletImg.src = "/images/bulletc.png"
 
 
 // PROJECTILE CONSTRUCTOR
 function Projectile(direction) {
-  this.height = 6;
-  this.width = 4;
+  this.height = 4;
+  this.width = 6;
   this.posY = player.posY+(player.height/2);
   this.posX = player.posX+player.width;
   this.direction = direction;

@@ -34,7 +34,7 @@ function moveEnemies() {
   for (var x = 0; x < enemiesArr.length; x++) {
     var floor = calcFloorEnemies(enemiesArr[x]);
     if(wallCheckEnemy(enemiesArr[x])){
-      enemiesArr[x].posX -= 7 ;
+      enemiesArr[x].posX -= 5 + isMoving ;
     }
     enemiesArr[x].posY += enemiesArr[x].gravity
     if (enemiesArr[x].gravity < 3) {

@@ -4,7 +4,8 @@ var down = false;
 var left = false;
 var right = false;
 var shoot = false;
-var direction = "right"
+var direction = "right";
+var isMoving = 0;
 
 //SOUNDS
 
@@ -27,6 +28,7 @@ var player = {
     if (this.posX < 450 && wallCheckRight())
       this.posX += 5
     else if (wallCheckRight()) {
+      isMoving = 3;
       backgrounds.move(5);
       movePlatforms(5);
     }
@@ -107,6 +109,9 @@ function playerMovement() {
   }
   if (right == true) {
     player.moveRight();
+  }
+  else{
+    isMoving = 0; //Needed to add extra speed to enemy when bg moves
   }
   if (up == true) {
     player.moveUp();
