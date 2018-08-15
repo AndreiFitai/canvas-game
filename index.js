@@ -22,7 +22,7 @@ window.onload = function () {
   };
 
   function startGame(){
-    gameInterval = setInterval(gameplay, 1000 / 50)
+    gameInterval = setInterval(gameplay, 1000/50)
     music.play();
   }
 

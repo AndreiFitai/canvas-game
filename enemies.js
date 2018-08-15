@@ -27,7 +27,8 @@ function clearEnemies() {
 }
 
 function clearEnemy(index) {
-  enemiesArr.splice(index, 1)
+  // explode.draw(enemiesArr[index].posX,enemiesArr[index].posY);
+  enemiesArr.splice(index, 1);
 }
 
 function moveEnemies() {

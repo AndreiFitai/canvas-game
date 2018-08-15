@@ -4,24 +4,37 @@ var platformArr = []
 var startingPlatforms = true;
 var pitCounter = 0;
 
+var platform1Img = new Image();
+platform1Img.src = "/images/platforms/platform1.png"
+var platform2Img = new Image();
+platform2Img.src = "/images/platforms/platform2.png"
+var platformThinImg = new Image();
+platformThinImg.src = "/images/platforms/platformThin.png"
+
+
 function Platform(previousX,previousY) {
   this.width = 150;
   this.height = 500;
   this.posX = previousX+this.width;
   this.prevPosY = previousY;
   this.posY = 500 - randHeight();
+  this.img = platform1Img
   if ( this.prevPosY - this.posY > 100)
     this.posY = this.prevPosY-100
+  if (Math.floor(Math.random() * 100) < 15)
+    this.img = platform2Img
 };
 
 function PlatformThin(previousX,previousY) {
   this.width = 150;
-  this.height = 25;
+  this.height = 50;
   this.posX = previousX+this.width;
   this.prevPosY = previousY;
   this.posY = 500 - randHeight();
+  this.img = platformThinImg
   if ( this.prevPosY - this.posY > 100)
     this.posY = this.prevPosY-100
+
 };
 
 function randHeight(){
@@ -55,7 +68,7 @@ function createPlatform(){
 
 function drawPlatforms() {
   for ( var x = 0; x < platformArr.length; x++){
-    ctx.fillRect(platformArr[x].posX, platformArr[x].posY, platformArr[x].width, platformArr[x].height);
+    ctx.drawImage(platformArr[x].img,platformArr[x].posX, platformArr[x].posY, platformArr[x].width, platformArr[x].height);
   }
 }
 
