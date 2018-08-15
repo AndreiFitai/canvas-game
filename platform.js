@@ -5,7 +5,7 @@ var startingPlatforms = true;
 var pitCounter = 0;
 
 var platform1Img = new Image();
-platform1Img.src = "/images/platforms/platform1.png"
+platform1Img.src = "/images/platforms/platform1alt.png"
 var platform2Img = new Image();
 platform2Img.src = "/images/platforms/platform2.png"
 var platformThinImg = new Image();

@@ -8,6 +8,14 @@ function Enemy() {
   this.gravity = 3;
   this.canJump = true;
   this.currentPlat = 0;
+
+  this.explode = function() {
+    explosions.push({
+      x: this.posX,
+      y: this.posY,
+      ttl: 10
+    })
+  }
 }
 
 function createEnemy() {
@@ -27,7 +35,7 @@ function clearEnemies() {
 }
 
 function clearEnemy(index) {
-  // explode.draw(enemiesArr[index].posX,enemiesArr[index].posY);
+  enemiesArr[index].explode();
   enemiesArr.splice(index, 1);
 }
 

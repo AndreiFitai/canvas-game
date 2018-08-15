@@ -6,6 +6,7 @@ var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 var score = 0;
 var lives = 200;
+var explosions = [];
 var gameInterval;
 var updateCounter = 0
 var music = new Audio();
@@ -20,18 +21,9 @@ window.onload = function () {
         isGameStarted = true;
     }
   };
+}
 
-  function startGame(){
-    gameInterval = setInterval(gameplay, 1000/50)
-    music.play();
-  }
-
-
-  function drawScore() {
-    ctx.font = "30px Arial";
-    ctx.fillText("Score:" + score, 10, 50);
-    ctx.fillText("Lives:" + lives, 800, 50)
-  }
+  
 
 
   function gameplay() {
@@ -42,6 +34,8 @@ window.onload = function () {
     createPlatform();
     drawPlatforms();
     createPlatform();
+    updateExplosions();
+    drawExplosions();
     moveBullets();
     player.draw();
     createEnemy();
@@ -56,4 +50,22 @@ window.onload = function () {
     drawScore();
     updateCounter++;
   }
+
+function startGame(){
+  gameInterval = setInterval(gameplay, 1000/50)
+  music.play();
+}
+
+
+function drawScore() {
+  ctx.font = "30px Arial";
+  ctx.fillText("Score:" + score, 10, 50);
+  ctx.fillText("Lives:" + lives, 800, 50)
+}
+
+function updateExplosions() {
+  for (var i = 0; i < explosions.length; i++) {
+    explosions[i].ttl--;
+  }
+  explosions = explosions.filter(function(e) { return e.ttl > 0 })
 }
