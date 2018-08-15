@@ -29,7 +29,7 @@ var player = {
       this.posX += 5
     else if (wallCheckRight()) {
       isMoving = 3;
-      backgrounds.move(5);
+      moveBackgrounds(5);
       movePlatforms(5);
     }
   },

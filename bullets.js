@@ -10,7 +10,7 @@ function Projectile(direction) {
   this.height = 4;
   this.width = 6;
   this.posY = player.posY+(player.height/2);
-  this.posX = player.posX+player.width;
+  this.posX = player.posX+(player.width/2);
   this.direction = direction;
   ctx.drawImage(bulletImg,this.posX,this.posY,this.width,this.height);
 };
