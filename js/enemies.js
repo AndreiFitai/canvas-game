@@ -30,8 +30,10 @@ function Enemy() {
 }
 
 function createEnemy() {
-  if ((Math.floor(Math.random() * 1000) < 35) && enemiesArr.length <= 8)
-    enemiesArr.push(new Enemy())
+  if (!bossFight){
+    if ((Math.floor(Math.random() * 1000) < 35) && enemiesArr.length <= 8)
+      enemiesArr.push(new Enemy())
+  }
 }
 
 function clearEnemies() {

@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d')
 
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
-var score = 0;
+var score = 90;
 var lives = 200;
 var explosions = [];
 var gameInterval;
@@ -13,7 +13,7 @@ var startScreenInterval;
 var musicInt;
 var updateCounter = 0
 var music = new Audio();
-music.src = "sounds/music.mp3";
+// music.src = "sounds/music.mp3";
 music.loop = true;
 music.volume = 0.0;
 
@@ -55,6 +55,11 @@ function gameplay() {
   moveEnemies();
   playerCollision();
   checkIfHit();
+  if(bossFight && movedWhileBoss > 1200){
+    boss.draw();
+    checkIfBossHit();
+    checkIfWin();
+  }
   drawHearts();
   heartCollision();
   checkIfHitWall();
@@ -74,9 +79,14 @@ function startGame() {
   }
 }
 
+function checkIfWin(){
+  if ( bossLife <= 0){
+    musicInt = setInterval(setVolumeDown, 75);
+    clearInterval(gameInterval);
+  }
+}
 
 function setVolumeUp() {
-  console.log('test up')
   if (music.volume <= 0.25) {
     music.volume += 0.01;
   } 
@@ -86,7 +96,6 @@ function setVolumeUp() {
 
 
 function setVolumeDown() {
-  console.log("test down")
   if (music.volume > 0.01) {
     music.volume -= 0.01;
   } 
@@ -97,7 +106,7 @@ function setVolumeDown() {
 function drawScore() {
   ctx.font = "30px Helvetica";
   ctx.fillText("Score:" + score, 10, 50);
-  ctx.fillText("Lives:" + lives, 750, 50)
+  ctx.fillText("Health:" + lives, 750, 50)
 }
 
 function updateExplosions() {

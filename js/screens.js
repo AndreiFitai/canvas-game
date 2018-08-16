@@ -9,8 +9,9 @@ var button1 = new Image();
 button1.src = "images/screens/start.png";
 var deathBG = new Image();
 deathBG.src = "images/screens/deathscreen.png"
-restartBtn = new Image();
+var restartBtn = new Image();
 restartBtn.src = "images/screens/resetbutton.png"
+
 
 function drawStartScreen() {
   this.img = startBG;

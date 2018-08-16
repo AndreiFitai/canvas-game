@@ -23,6 +23,8 @@ function Platform(previousX,previousY) {
     this.posY = this.prevPosY-100
   if (Math.floor(Math.random() * 100) < 15)
     this.img = platform2Img
+  if (bossFight)
+    this.posY = 400
 };
 
 function PlatformThin(previousX,previousY) {
@@ -49,7 +51,7 @@ function randHeight(){
 function createPlatform(){
   if (startingPlatforms){
     platformArr.push(new Platform(150*(platformArr.length-1),500))
-    if (platformArr.length === 8){
+    if (platformArr.length === 8 && !bossFight){
       startingPlatforms = false;
     }
   }
