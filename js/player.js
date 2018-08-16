@@ -37,6 +37,7 @@ var player = {
       isMoving = 3;
       moveBackgrounds(5);
       movePlatforms(5);
+      moveHearts(5)
     }
   },
   moveUp: function () {
@@ -152,8 +153,20 @@ function playerCollision() {
     bulletsArr = [];
     enemiesArr = [];
     platformArr = [];
+    heartsArr = [];
     startingPlatforms = true;
     restartGame();
+  }
+}
+
+function heartCollision(){
+  for (let x = 0; x < heartsArr.length; x++) {
+    if ((heartsArr[x].posX >= player.posX &&heartsArr[x].posX <= player.posX + player.width) &&
+      (heartsArr[x].posY +heartsArr[x].height >= player.posY &&heartsArr[x].posY <= player.posY + player.height)){
+        console.log("called")
+        lives++;
+        destroyHeart(x)
+      } 
   }
 }
 

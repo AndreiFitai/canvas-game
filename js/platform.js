@@ -39,7 +39,7 @@ function PlatformThin(previousX,previousY) {
 
 function randHeight(){
   if (startingPlatforms)
-    return 300
+    return 350
   else if (Math.floor(Math.random() * 1000) < 50) // added more chances for pits to show up
     return 0
   else
@@ -60,7 +60,7 @@ function createPlatform(){
   }
   else if(platformArr.length < 8){
     startingPlatforms = true;
-    platformArr.push(new PlatformThin(platformArr[platformArr.length-1].posX,500))
+    platformArr.push(new PlatformThin(platformArr[platformArr.length-1].posX,550))
     startingPlatforms = false;
     pitCounter = 0;
   }

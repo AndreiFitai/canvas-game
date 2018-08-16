@@ -23,10 +23,10 @@ function drawDeathScreen() {
 }
 
 var startButton =  {
-  height: 45,
-  width : 99,
-  posX: (canvasWidth / 2) - (99 / 2),
-  posY: (canvasHeight / 2) - (45/ 2),
+  height: 90,
+  width : 198,
+  posX: (canvasWidth /2) - (198 / 2),
+  posY: (canvasHeight / 2) - 90,
   img: button1,
 }
 

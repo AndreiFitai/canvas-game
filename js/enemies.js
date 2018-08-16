@@ -49,6 +49,7 @@ function clearEnemies() {
 
 function clearEnemy(index) {
   enemiesArr[index].explode();
+  createHeart(enemiesArr[index].posX,enemiesArr[index].posY)
   enemiesArr.splice(index, 1);
 }
 

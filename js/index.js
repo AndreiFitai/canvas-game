@@ -28,7 +28,7 @@ function startScreen() {
 }
 
 function restartGame() {
-  musicInt = setInterval(setVolumeUp, 75);
+  musicInt = setInterval(setVolumeDown, 75);
   deathScreenInterval = setInterval(deathScreen, 1000 / 50)
 }
 
@@ -55,6 +55,8 @@ function gameplay() {
   moveEnemies();
   playerCollision();
   checkIfHit();
+  drawHearts();
+  heartCollision();
   checkIfHitWall();
   clearEnemies();
   removePlatforms();
@@ -74,19 +76,21 @@ function startGame() {
 
 
 function setVolumeUp() {
-  console.log('test')
+  console.log('test up')
   if (music.volume <= 0.25) {
     music.volume += 0.01;
-  } else
+  } 
+  else
     clearInterval(musicInt)
 }
 
 
 function setVolumeDown() {
-  console.log('test')
-  if (music.volume > 0) {
+  console.log("test down")
+  if (music.volume > 0.01) {
     music.volume -= 0.01;
-  } else
+  } 
+  else
     clearInterval(musicInt)
 }
 
