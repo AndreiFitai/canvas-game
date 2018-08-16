@@ -2,7 +2,7 @@ var bulletsArr = [];
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 var bulletImg = new Image()
-bulletImg.src = "/images/bulletc.png"
+bulletImg.src = "images/bullet.png"
 
 
 // PROJECTILE CONSTRUCTOR

@@ -5,11 +5,11 @@ var startingPlatforms = true;
 var pitCounter = 0;
 
 var platform1Img = new Image();
-platform1Img.src = "/images/platforms/platform1alt.png"
+platform1Img.src = "images/platforms/platform1alt.png"
 var platform2Img = new Image();
-platform2Img.src = "/images/platforms/platform2.png"
+platform2Img.src = "images/platforms/platform2.png"
 var platformThinImg = new Image();
-platformThinImg.src = "/images/platforms/platformThin.png"
+platformThinImg.src = "images/platforms/platformThin.png"
 
 
 function Platform(previousX,previousY) {

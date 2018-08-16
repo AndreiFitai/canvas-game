@@ -4,8 +4,8 @@ var down = false;
 var left = false;
 var right = false;
 var shoot = false;
-var direction = "right";
 var isMoving = 0;
+
 
 //SOUNDS
 
@@ -17,14 +17,15 @@ var player = {
   posY: 100,
   gravity: 3,
   canJump: false,
+  direction: "right",
   moveLeft: function () {
-    direction = "left"
+    this.direction = "left"
     if (wallCheckLeft() && this.posX> 50)
       this.posX -= 5
   },
 
   moveRight: function () {
-    direction = "right"
+    this.direction = "right"
     if (this.posX < 450 && wallCheckRight())
       this.posX += 5
     else if (wallCheckRight()) {
@@ -45,10 +46,7 @@ var player = {
   },
 
   shoot: function () {
-    if (this.direction == 'right')
-      projectile.pew('right')
-    else
-      projectile.pew('left')
+    bulletsArr.push(new Projectile(this.direction));
   },
 
   draw: function () {
@@ -121,7 +119,7 @@ function playerMovement() {
   }
   if (shoot == true) {
     if (updateCounter % 15 == 0 || first == 0) {
-      bulletsArr.push(new Projectile(direction));
+      player.shoot();
       first++;
     }
   }
@@ -135,10 +133,17 @@ function playerCollision() {
       lives--;
     }
   }
+  // CHECK FOR DEATH AND RESETS PLAYER POS BULLETS/PLATFORMS/ENEMY ARR
   if (player.posY + player.height == 500 || lives == 0) {
     clearInterval(gameInterval)
-    ctx.font = "30px Arial";
-    ctx.fillText("Game Over !" + "\n" + "Final score:" + score, 300, 100);
+    lives = 10;
+    player.posX = 200;
+    player.posY = 100;
+    bulletsArr = [];
+    enemiesArr = [];
+    platformArr = [];
+    startingPlatforms = true;
+    restartGame();
   }
 }
 
@@ -182,3 +187,5 @@ document.onkeyup = function (e) {
       break;
   }
 };
+
+

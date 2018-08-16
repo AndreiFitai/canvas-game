@@ -16,6 +16,17 @@ function Enemy() {
       ttl: 10
     })
   }
+
+
+  this.wallCheckEnemy = function () {
+    if (this.currentPlat-1 >= 0){
+      if (this.posY + this.height > platformArr[(this.currentPlat) - 1].posY && this.posX <= platformArr[(this.currentPlat) - 1].posX + platformArr[(this.currentPlat) - 1].width) {
+        this.posX = platformArr[(this.currentPlat) - 1].posX + platformArr[(this.currentPlat) - 1].width
+        return false
+      }
+    }
+    return true;
+  }
 }
 
 function createEnemy() {
@@ -28,8 +39,10 @@ function clearEnemies() {
     if (enemiesArr[x].posX+enemiesArr[x].width < 0) {
       enemiesArr.splice(x, 1);
     }
-    if (enemiesArr[x].posY + enemiesArr[x].height == 500) {
-      enemiesArr.splice(x,1);
+    if (enemiesArr[x] != undefined){
+      if (enemiesArr[x].posY + enemiesArr[x].height == 500) {
+        enemiesArr.splice(x,1);
+      }
     }
   }
 }
@@ -42,7 +55,7 @@ function clearEnemy(index) {
 function moveEnemies() {
   for (var x = 0; x < enemiesArr.length; x++) {
     var floor = calcFloorEnemies(enemiesArr[x]);
-    if(wallCheckEnemy(enemiesArr[x])){
+    if(enemiesArr[x].wallCheckEnemy()){
       enemiesArr[x].posX -= 5 + isMoving ;
     }
     enemiesArr[x].posY += enemiesArr[x].gravity
@@ -62,15 +75,6 @@ function moveEnemies() {
   }
 }
 
-function wallCheckEnemy(enemy) {
-  if (enemy.currentPlat-1 >= 0){
-    if (enemy.posY + enemy.height > platformArr[(enemy.currentPlat) - 1].posY && enemy.posX <= platformArr[(enemy.currentPlat) - 1].posX + platformArr[(enemy.currentPlat) - 1].width) {
-      enemy.posX = platformArr[(enemy.currentPlat) - 1].posX + platformArr[(enemy.currentPlat) - 1].width
-      return false
-    }
-  }
-  return true;
-}
 
 function calcFloorEnemies(enemy) {
   var tempPos = 0;
