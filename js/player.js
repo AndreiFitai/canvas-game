@@ -5,7 +5,10 @@ var left = false;
 var right = false;
 var shoot = false;
 var isMoving = 0;
-
+var bubbleStart = new Image();
+bubbleStart.src = "images/speechbubblestart.png"
+var bubbleBoss = new Image();
+bubbleBoss = "images/speechbubbleboss.png"
 
 //SOUNDS
 
@@ -18,6 +21,8 @@ var player = {
   gravity: 3,
   canJump: false,
   direction: "right",
+  startMsg: bubbleStart,
+  bossMsg: bubbleBoss,
   moveLeft: function () {
     this.direction = "left"
     if (wallCheckLeft() && this.posX> 50)
@@ -59,7 +64,11 @@ var player = {
       this.gravity = 0
       this.canJump = true
     }
+    if ( updateCounter < 300){
+      ctx.drawImage(bubbleStart,this.posX-15, this.posY-50,180,50)
+    }
     ctx.fillRect(this.posX, this.posY, this.width, this.height)
+
   }
 }
 
@@ -137,6 +146,7 @@ function playerCollision() {
   if (player.posY + player.height == 500 || lives == 0) {
     clearInterval(gameInterval)
     lives = 10;
+    score = 0;
     player.posX = 200;
     player.posY = 100;
     bulletsArr = [];

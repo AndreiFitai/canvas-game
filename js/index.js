@@ -28,12 +28,14 @@ function startScreen() {
 }
 
 function restartGame() {
+  musicInt = setInterval(setVolumeUp, 75);
   deathScreenInterval = setInterval(deathScreen, 1000 / 50)
 }
 
 function deathScreen() {
   drawDeathScreen();
   drawRestartButton();
+
 }
 
 function gameplay() {
@@ -65,25 +67,27 @@ function startGame() {
   if (isGameStarted == false) {
     music.play();
     isGameStarted = true
-    musicInt = setInterval(setVolume("up"), 100);
+    musicInt = setInterval(setVolumeUp, 75);
     gameInterval = setInterval(gameplay, 1000 / 50)
   }
 }
 
 
-function setVolume(upOrDown) {
-  if (upOrDown == "up") {
-    if (music.volume < 0.25) {
-      music.volume += 0.01;
-    } else
-      clearInterval(musicInt)
-  }
-  if (upOrDown == "down") {
-    if (music.volume < 0) {
-      music.volume -= 0.01;
-    } else
-      clearInterval(musicInt)
-  }
+function setVolumeUp() {
+  console.log('test')
+  if (music.volume <= 0.25) {
+    music.volume += 0.01;
+  } else
+    clearInterval(musicInt)
+}
+
+
+function setVolumeDown() {
+  console.log('test')
+  if (music.volume > 0) {
+    music.volume -= 0.01;
+  } else
+    clearInterval(musicInt)
 }
 
 function drawScore() {
