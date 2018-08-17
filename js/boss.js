@@ -36,9 +36,25 @@ function Boss() {
 
 //INSERT COMMENT HERE
 
+function bossRandPos(){
+  return (Math.floor((Math.random() * 5) + 1))
+}
+
+var bossInTheMiddle = false;
+function checkBossPos(){
+  if (bossArr[0].posX > 449 && bossArr[0].posX < 451)
+    bossInTheMiddle = true;
+  else if ( bossArr[0].posX > 795 && bossArr[0].posX < 805)
+    bossInTheMiddle = false;
+}
+
+
 function moveBoss() {
-  if (bossArr[0].posX > canvasWidth - 100) {
+  if (!bossInTheMiddle && bossArr[0].posX > canvasWidth - 450) {
     bossArr[0].posX -= 3
+  }
+  if (bossInTheMiddle && bossArr[0].posX < canvasWidth - 100) {
+    bossArr[0].posX += 3
   }
   bossArr[0].posY += bossArr[0].gravity
   if (bossArr[0].gravity < 3) {
@@ -53,6 +69,7 @@ function moveBoss() {
     bossArr[0].gravity = -(Math.floor((Math.random() * 10) + 2));
     bossArr[0].canJump = false;
   }
+  checkBossPos();
   ctx.drawImage(bossImg, bossArr[0].posX, bossArr[0].posY, bossArr[0].width, bossArr[0].height)
 }
 
