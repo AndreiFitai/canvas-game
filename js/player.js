@@ -9,7 +9,7 @@ var movedWhileBoss = 0;
 var bubbleStart = new Image();
 bubbleStart.src = "images/speechbubblestart.png"
 var bubbleBoss = new Image();
-bubbleBoss = "images/speechbubbleboss.png"
+bubbleBoss.src = "images/speechbubbleboss.png"
 var playerImgRight = new Image();
 playerImgRight.src = "images/playerRight.png"
 var playerImgLeft = new Image();
@@ -84,9 +84,9 @@ var player = {
     if (updateCounter < 300) {
       ctx.drawImage(this.startMsg, this.posX - 15, this.posY - 50, 180, 50)
     }
-    // if(bossFight && movedWhileBoss > 1200 && bossLife > 30){
-    //   ctx.drawImage(this.bossMsg, this.posX - 15, this.posY - 50, 180, 50)
-    // }
+    if(bossFight && movedWhileBoss > 1200 && bossLife > 30){
+      ctx.drawImage(this.bossMsg, this.posX - 15, this.posY - 50, 180, 50)
+    }
     if (this.direction == "right")
       ctx.drawImage(this.imgRight,this.posX, this.posY, this.width, this.height)
     else
