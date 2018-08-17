@@ -5,6 +5,8 @@ var bossBullet = new Image();
 bossBullet.src = "images/bossbullet.png"
 var bossHealthBarr = new Image();
 bossHealthBarr.src = "images/bosslife.png"
+var bossImg = new Image();
+bossImg.src = "images/boss.png"
 bossArr = [];
 bossArr.push(new Boss())
 
@@ -15,7 +17,7 @@ function startBossFight() {
 
 function Boss() {
   this.height = 200;
-  this.width = 75;
+  this.width = 125;
   this.posX = canvasWidth;
   this.posY = 100;
   this.gravity = 3;
@@ -49,7 +51,7 @@ function moveBoss() {
     bossArr[0].gravity = -(Math.floor((Math.random() * 10) + 2));
     bossArr[0].canJump = false;
   }
-  ctx.fillRect(bossArr[0].posX, bossArr[0].posY, bossArr[0].width, bossArr[0].height)
+  ctx.drawImage(bossImg, bossArr[0].posX, bossArr[0].posY, bossArr[0].width, bossArr[0].height)
 }
 
 function Bullet(origin) {
@@ -108,5 +110,5 @@ function isBossLvlClicked(x, y) {
 
 function setBossLvl() {
   score = 99;
-  bossLife = 10;
+  bossLife = 50;
 }

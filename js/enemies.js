@@ -1,14 +1,16 @@
 var enemiesArr = []
+var enemyImg = new Image();
+enemyImg.src = "images/zombie.png"
 
 function Enemy() {
   this.height = 35;
-  this.width = 15;
+  this.width = 22;
   this.posX = canvasWidth;
   this.posY = calcFloorEnemies(this) - Math.floor(Math.random()*100);
   this.gravity = 3;
   this.canJump = true;
   this.currentPlat = 0;
-
+  this.img =enemyImg;
   this.explode = function() {
     explosions.push({
       x: this.posX,
@@ -74,7 +76,7 @@ function moveEnemies() {
       enemiesArr[x].gravity = -(Math.floor((Math.random()*10)+3));
       enemiesArr[x].canJump = false;
     }
-    ctx.fillRect(enemiesArr[x].posX, enemiesArr[x].posY, enemiesArr[x].width, enemiesArr[x].height)
+    ctx.drawImage(enemiesArr[x].img,enemiesArr[x].posX, enemiesArr[x].posY, enemiesArr[x].width, enemiesArr[x].height)
   }
 }
 

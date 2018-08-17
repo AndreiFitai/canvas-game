@@ -10,13 +10,17 @@ var bubbleStart = new Image();
 bubbleStart.src = "images/speechbubblestart.png"
 var bubbleBoss = new Image();
 bubbleBoss = "images/speechbubbleboss.png"
+var playerImgRight = new Image();
+playerImgRight.src = "images/playerRight.png"
+var playerImgLeft = new Image();
+playerImgLeft.src = "images/playerLeft.png"
 
 //SOUNDS
 
 //PLAYER CHARACTER OBJECT
 var player = {
   height: 50,
-  width: 20,
+  width: 30,
   posX: 200,
   posY: 100,
   gravity: 3,
@@ -24,6 +28,8 @@ var player = {
   direction: "right",
   startMsg: bubbleStart,
   bossMsg: bubbleBoss,
+  imgRight: playerImgRight,
+  imgLeft: playerImgLeft,
   moveLeft: function () {
     this.direction = "left"
     if (wallCheckLeft() && this.posX > 50)
@@ -78,8 +84,10 @@ var player = {
     if (updateCounter < 300) {
       ctx.drawImage(bubbleStart, this.posX - 15, this.posY - 50, 180, 50)
     }
-    ctx.fillRect(this.posX, this.posY, this.width, this.height)
-
+    if (this.direction == "right")
+      ctx.drawImage(this.imgRight,this.posX, this.posY, this.width, this.height)
+    else
+      ctx.drawImage(this.imgLeft,this.posX, this.posY, this.width, this.height)
   }
 }
 

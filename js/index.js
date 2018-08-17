@@ -5,7 +5,7 @@ var ctx = canvas.getContext('2d')
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 var score = 0;
-var lives = 200;
+var lives = 10;
 var explosions = [];
 var gameInterval;
 var deathScreenInterval;
@@ -14,7 +14,7 @@ var winScreenInterval;
 var musicInt;
 var updateCounter = 0
 var music = new Audio();
-// music.src = "sounds/music.mp3";
+music.src = "sounds/music.mp3";
 music.loop = true;
 music.volume = 0.0;
 
@@ -45,8 +45,6 @@ function winScreen(){
 
 function gameplay() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  //globalAlpha for testing - please remove before final
-  // ctx.globalAlpha = 0.2
   drawBackgrounds();
   createPlatform();
   drawPlatforms();
