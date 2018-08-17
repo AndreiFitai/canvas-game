@@ -82,14 +82,18 @@ var player = {
       this.canJump = true
     }
     if (updateCounter < 300) {
-      ctx.drawImage(bubbleStart, this.posX - 15, this.posY - 50, 180, 50)
+      ctx.drawImage(this.startMsg, this.posX - 15, this.posY - 50, 180, 50)
     }
+    // if(bossFight && movedWhileBoss > 1200 && bossLife > 30){
+    //   ctx.drawImage(this.bossMsg, this.posX - 15, this.posY - 50, 180, 50)
+    // }
     if (this.direction == "right")
       ctx.drawImage(this.imgRight,this.posX, this.posY, this.width, this.height)
     else
       ctx.drawImage(this.imgLeft,this.posX, this.posY, this.width, this.height)
   }
 }
+
 
 var currentPlat = 0;
 // CALCULATE CURRENT PLATFORM TOP POSITION
