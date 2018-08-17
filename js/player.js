@@ -152,6 +152,13 @@ function playerCollision() {
       lives--;
     }
   }
+    for (var i = 0; i < bossBulletsArr.length; i++) {
+      if ((bossBulletsArr[i].posX >= player.posX && bossBulletsArr[i].posX <= player.posX + player.width) &&
+        (bossBulletsArr[i].posY + bossBulletsArr[i].height >= player.posY && bossBulletsArr[i].posY <= player.posY + player.height)) {
+        clearBossBullets(i);
+        lives--;
+      }
+    }
   // CHECK FOR DEATH AND RESETS PLAYER POS BULLETS/PLATFORMS/ENEMY ARR
   if (player.posY + player.height == 500 || lives == 0) {
     clearInterval(gameInterval)
@@ -172,7 +179,6 @@ function heartCollision() {
   for (let x = 0; x < heartsArr.length; x++) {
     if ((heartsArr[x].posX >= player.posX && heartsArr[x].posX <= player.posX + player.width) &&
       (heartsArr[x].posY + heartsArr[x].height >= player.posY && heartsArr[x].posY <= player.posY + player.height)) {
-      console.log("called")
       lives++;
       destroyHeart(x)
     }

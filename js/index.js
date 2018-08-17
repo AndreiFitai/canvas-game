@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d')
 
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
-var score = 90;
+var score = 0;
 var lives = 200;
 var explosions = [];
 var gameInterval;
@@ -47,7 +47,6 @@ function gameplay() {
   drawPlatforms();
   createPlatform();
   updateExplosions();
-  drawExplosions();
   moveBullets();
   player.draw();
   createEnemy();
@@ -56,10 +55,15 @@ function gameplay() {
   playerCollision();
   checkIfHit();
   if(bossFight && movedWhileBoss > 1200){
-    boss.draw();
+    boss.drawHPBar();
+    moveBoss();
+    createBossBullet();
+    moveBossBullets();
+    emptyBossBulletArr();
     checkIfBossHit();
     checkIfWin();
   }
+  drawExplosions();
   drawHearts();
   heartCollision();
   checkIfHitWall();
@@ -83,6 +87,7 @@ function checkIfWin(){
   if ( bossLife <= 0){
     musicInt = setInterval(setVolumeDown, 75);
     clearInterval(gameInterval);
+    
   }
 }
 
@@ -126,7 +131,12 @@ canvas.onclick = function (e) {
     if (isItClickedRestart(x, y)) {
       restartClick();
     }
-  } else if (isItClicked(x, y)) {
+  } 
+  else if (isItClicked(x, y)) {
+    startClick();
+  } 
+  else if (isBossLvlClicked(x, y)){
+    setBossLvl();
     startClick();
   }
 }
