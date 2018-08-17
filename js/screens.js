@@ -12,6 +12,7 @@ deathBG.src = "images/screens/deathscreen.png"
 var restartBtn = new Image();
 restartBtn.src = "images/screens/resetbutton.png"
 var winBG = new Image()
+winBG.src = "images/screens/winscreen.png"
 
 
 function drawStartScreen() {
@@ -21,6 +22,11 @@ function drawStartScreen() {
 
 function drawDeathScreen() {
   this.img = deathBG;
+  ctx.drawImage(this.img, 0, 0, canvasWidth, canvasHeight)
+}
+
+function drawWinScreen() {
+  this.img = winBG;
   ctx.drawImage(this.img, 0, 0, canvasWidth, canvasHeight)
 }
 
@@ -40,12 +46,24 @@ var restartButton = {
   img: restartBtn,
 }
 
+var winButton = {
+  height: 45,
+  width : 99,
+  posX: (canvasWidth / 2) - (99 / 2),
+  posY: (canvasHeight) - (45)*2,
+  img: button1,
+}
+
 function drawStartButtons(){
   ctx.drawImage(startButton.img, startButton.posX,startButton.posY, startButton.width, startButton.height);
 }
 
 function drawRestartButton(){
   ctx.drawImage(restartButton.img, restartButton.posX,restartButton.posY, restartButton.width, restartButton.height);
+}
+
+function drawWinButton(){
+  ctx.drawImage(winButton.img, winButton.posX,winButton.posY, winButton.width, winButton.height);
 }
 
 function startClick() {
@@ -65,4 +83,8 @@ function isItClicked(x, y) {
 
 function isItClickedRestart(x, y) {
   return (x > restartButton.posX && x < restartButton.posX+restartButton.width) && (y > restartButton.posY && y < restartButton.posY+restartButton.height)
+}
+
+function isWinClicked(x,y){
+  return (x > winButton.posX && x < winButton.posX+winButton.width) && (y > winButton.posY && y < winButton.posY+winButton.height)
 }

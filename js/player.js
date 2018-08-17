@@ -173,6 +173,20 @@ function playerCollision() {
     startingPlatforms = true;
     restartGame();
   }
+  if((player.posX >= bossArr[0].posX && player.posX <= bossArr[0].posX + bossArr[0].width) &&
+  (player.posY + player.height >= bossArr[0].posY && player.posY <= bossArr[0].posY + bossArr[0].height)){
+    clearInterval(gameInterval)
+    lives = 10;
+    score = 100;
+    player.posX = 200;
+    player.posY = 100;
+    bulletsArr = [];
+    enemiesArr = [];
+    platformArr = [];
+    heartsArr = [];
+    startingPlatforms = true;
+    restartGame();
+  }
 }
 
 function heartCollision() {

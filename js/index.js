@@ -10,6 +10,7 @@ var explosions = [];
 var gameInterval;
 var deathScreenInterval;
 var startScreenInterval;
+var winScreenInterval;
 var musicInt;
 var updateCounter = 0
 var music = new Audio();
@@ -29,13 +30,17 @@ function startScreen() {
 
 function restartGame() {
   musicInt = setInterval(setVolumeDown, 75);
-  deathScreenInterval = setInterval(deathScreen, 1000 / 50)
+  deathScreenInterval = setInterval(deathScreen, 1000 / 100)
 }
 
 function deathScreen() {
   drawDeathScreen();
   drawRestartButton();
+}
 
+function winScreen(){
+  drawWinScreen();
+  drawWinButton();
 }
 
 function gameplay() {
@@ -55,7 +60,7 @@ function gameplay() {
   playerCollision();
   checkIfHit();
   if(bossFight && movedWhileBoss > 1200){
-    boss.drawHPBar();
+    bossArr[0].drawHPBar();
     moveBoss();
     createBossBullet();
     moveBossBullets();
@@ -75,19 +80,36 @@ function gameplay() {
 }
 
 function startGame() {
+  clearInterval(winScreenInterval);
   if (isGameStarted == false) {
     music.play();
-    isGameStarted = true
+    isGameStarted = true;
+    movedWhileBoss = 0;
+    bossFight = false;
+    bossArr.push(new Boss())
+    bossLife = 100;
     musicInt = setInterval(setVolumeUp, 75);
+    lives = 10;
+    score = 0;
+    player.posX = 200;
+    player.posY = 100;
+    bulletsArr = [];
+    enemiesArr = [];
+    platformArr = [];
+    heartsArr = [];
+    startingPlatforms = true;
     gameInterval = setInterval(gameplay, 1000 / 50)
   }
 }
 
 function checkIfWin(){
   if ( bossLife <= 0){
+    console.log('called')
     musicInt = setInterval(setVolumeDown, 75);
     clearInterval(gameInterval);
-    
+    bossArr = [];
+    isGameStarted == false;
+    winScreenInterval = setInterval(winScreen, 1000/100)
   }
 }
 
@@ -131,12 +153,15 @@ canvas.onclick = function (e) {
     if (isItClickedRestart(x, y)) {
       restartClick();
     }
+  }
+  else if (bossFight && isWinClicked(x,x)){
+    startClick();
   } 
   else if (isItClicked(x, y)) {
     startClick();
   } 
   else if (isBossLvlClicked(x, y)){
-    setBossLvl();
     startClick();
+    setBossLvl();
   }
 }

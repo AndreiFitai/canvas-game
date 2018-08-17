@@ -56,9 +56,9 @@ function checkIfHit() {
 
 function checkIfBossHit() {
   for (var x = 0; x < bulletsArr.length; x++) {
-    if ((bulletsArr[x].posX >= boss.posX && bulletsArr[x].posX <= boss.posX + (boss.width / 2)) &&
-      (bulletsArr[x].posY >= boss.posY && bulletsArr[x].posY <= boss.posY + (boss.height / 2))) {
-      boss.explode(bulletsArr[x].posX, bulletsArr[x].posY)
+    if ((bulletsArr[x].posX >= bossArr[0].posX && bulletsArr[x].posX <= bossArr[0].posX + (bossArr[0].width / 2)) &&
+      (bulletsArr[x].posY >= bossArr[0].posY && bulletsArr[x].posY <= bossArr[0].posY + (bossArr[0].height / 2))) {
+      bossArr[0].explode(bulletsArr[x].posX, bulletsArr[x].posY)
       clearBullet(x);
       bossLife--;
       break;
