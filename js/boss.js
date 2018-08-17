@@ -34,6 +34,8 @@ function Boss() {
   }
 }
 
+//INSERT COMMENT HERE
+
 function moveBoss() {
   if (bossArr[0].posX > canvasWidth - 100) {
     bossArr[0].posX -= 3
