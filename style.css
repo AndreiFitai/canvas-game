@@ -1,5 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 canvas {
-  border: 1px solid black;
-  margin: 50px 15vw;
+  margin: 5vw 15vw;
   width: 70vw;
 }
